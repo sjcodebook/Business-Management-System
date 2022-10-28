@@ -1,6 +1,6 @@
 {
   "projects": {
-    "default": "xxxxxx",
-    "prod": "xxxxxxxx"
+    "default": "ilias-crm",
+    "prod": "ilias-crm"
   }
 }
