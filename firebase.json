@@ -1,0 +1,66 @@
+{
+  "hosting": {
+    "public": "build",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "/api/generatePdfContent",
+        "function": "generatePdfContent"
+      },
+      {
+        "source": "/api/sendQuoteMail",
+        "function": "sendQuoteMail"
+      },
+      {
+        "source": "/api/sendInvoiceMail",
+        "function": "sendInvoiceMail"
+      },
+      {
+        "source": "/api/createEstimateEntryInSheet",
+        "function": "createEstimateEntryInSheet"
+      },
+      {
+        "source": "/api/createCalenderEvent",
+        "function": "createCalenderEvent"
+      },
+      {
+        "source": "/api/addEstimateRequest",
+        "function": "addEstimateRequest"
+      },
+      {
+        "source": "!{/js,/scripts,/styles,/css,/images}/**",
+        "destination": "/index.html"
+      }
+    ]
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "storage": {
+    "rules": "storage.rules"
+  },
+  "emulators": {
+    "auth": {
+      "port": 9099
+    },
+    "functions": {
+      "port": 5001
+    },
+    "firestore": {
+      "port": 8080
+    },
+    "database": {
+      "port": 9000
+    },
+    "hosting": {
+      "port": 5000
+    },
+    "pubsub": {
+      "port": 8085
+    },
+    "ui": {
+      "enabled": true
+    }
+  }
+}

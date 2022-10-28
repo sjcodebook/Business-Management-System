@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Business Manager</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      crossorigin="anonymous"
+    />
+    <style type="text/css">
+      body {
+        margin: 0;
+        font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+          Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+          'Noto Color Emoji';
+        font-size: 0.8125rem;
+        font-weight: 400;
+        line-height: 1.5385;
+        color: #333;
+        text-align: left;
+        background-color: #eee;
+      }
+
+      thead {
+        display: table-row-group;
+      }
+
+      .mt-50 {
+        margin-top: 50px;
+      }
+
+      .mb-50 {
+        margin-bottom: 50px;
+      }
+
+      .card {
+        position: relative;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 1px solid rgba(0, 0, 0, 0.125);
+        border-radius: 0.1875rem;
+      }
+
+      .card-img-actions {
+        position: relative;
+      }
+
+      .card-body {
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        padding: 1.25rem;
+        text-align: center;
+      }
+
+      .card-title {
+        margin-top: 10px;
+        font-size: 17px;
+      }
+
+      .invoice-color {
+        color: red !important;
+      }
+
+      .card-header {
+        padding: 0.9375rem 1.25rem;
+        margin-bottom: 0;
+        background-color: rgba(0, 0, 0, 0.02);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+      }
+
+      a {
+        text-decoration: none !important;
+      }
+
+      .btn-light {
+        color: #333;
+        background-color: #fafafa;
+        border-color: #ddd;
+      }
+
+      .header-elements-inline {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-align: center;
+        align-items: center;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+      }
+
+      @media (min-width: 768px) {
+        .wmin-md-400 {
+          min-width: 400px !important;
+        }
+      }
+
+      .btn-primary {
+        color: #fff;
+        background-color: #2196f3;
+      }
+
+      .btn-labeled > b {
+        position: absolute;
+        top: -1px;
+        background-color: blue;
+        display: block;
+        line-height: 1;
+        padding: 0.62503rem;
+      }
+
+      .center {
+        text-align: center;
+      }
+
+      .logo {
+        width: 35%;
+        position: absolute;
+        right: 25px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container mt-50 mb-50">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card" id="invoice">
+            <div
+              class="card-header bg-transparent header-elements-inline"
+              style="justify-content: center"
+            >
+              RBQ: 5790-3130-01 - TPS: 725 262 471 RT 0001 - TVQ: 122 683 5837 TQ 0001 - ASSURANCE
+              RESPONSABILITE CIVILE – 2,000,000$
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-12">
+                  <h2 class="text-center">Estimation Travaux de Peinture</h2>
+                </div>
+                <div class="col-sm-6">
+                  <div class="mb-4 pull-left">
+                    <ul class="list list-unstyled mb-0 text-left">
+                      <li>
+                        <a href="https://peinturemofax.com"
+                          ><span style="color: #3574f1"
+                            ><strong><%= user.name || "Business Manager" %></strong></span
+                          ></a
+                        >
+                      </li>
+                      <li style="color: #000000">4350 Rle QuinnVerdun, QC H4G 1L9</li>
+                      <li style="color: #000000"><%= user.phone || "+1 514 562 9534" %></li>
+                      <li style="color: #000000"><%= user.email || "abc@xyz.com" %></li>
+                    </ul>
+                  </div>
+                </div>
+                <% if (allInfo.newEstimateNumber) { %>
+                <div class="col-sm-6" style="text-align: right">
+                  <div class="col-sm-12"><%= allInfo.createdAt %></div>
+                  <br />
+                  <div class="col-sm-12">
+                    Numéro de la soumission: <%= allInfo.newEstimateNumber %>
+                  </div>
+                </div>
+                <% } else { %>
+                <div class="col-sm-6"></div>
+                <% } %>
+              </div>
+              <div class="d-md-flex flex-md-wrap">
+                <div class="mb-4 mb-md-2 text-left">
+                  <span class="text-muted">Estimation Pour:</span>
+                  <img class="logo" src="https://xxxxxx.web.app/logo.png" id="100" />
+                  <% if (allInfo) { %>
+                  <ul class="list list-unstyled mb-0">
+                    <% if (typeof allInfo.custInfo.name==='string') { %>
+                    <li>
+                      <h5 class="my-2"><strong><%= allInfo.custInfo.name %></strong></h5>
+                    </li>
+                    <% } else if (allInfo.custInfo.name.length===0) { %>
+                    <li>
+                      <h5 class="my-2"><strong>Name Missing</strong></h5>
+                    </li>
+                    <% } else if(allInfo.custInfo.name.length !== 0) { %> <% for( let i = 0; i <
+                    allInfo.custInfo.name.length; i++ ) { %>
+                    <li>
+                      <h5 class="my-2"><strong><%= allInfo.custInfo.name[i] %></strong></h5>
+                    </li>
+                    <% } %> <% } %> <% for( let i = 0; i < allInfo.custInfo.address.length; i++ ) {
+                    %> <% if (i===0) { %>
+                    <li>
+                      <span class="font-weight-semibold"><%= allInfo.custInfo.address[i] %></span>
+                    </li>
+                    <% } else if(i !== 0) { %>
+                    <li><%= allInfo.custInfo.address[i] %></li>
+                    <% } %> <% } %>
+                    <li><%= allInfo.custInfo.phone %></li>
+                    <li>
+                      <a href="#" data-abc="true"
+                        ><%= allInfo.custInfo.email || 'Email Missing' %></a
+                      >
+                    </li>
+                  </ul>
+                  <% } %>
+                </div>
+              </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <div class="table-responsive">
+              <table class="table table-lg">
+                <thead>
+                  <tr>
+                    <th>Description</th>
+                    <th>Prix Avant Taxes</th>
+                    <th>Taxes</th>
+                    <th>Prix Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% if (allInfo && allInfo.tableData && allInfo.tableData.length !== 0) { %> <%
+                  allInfo.tableData.forEach(el => { %>
+                  <tr>
+                    <td>
+                      <h6 class="mb-0"><%= el.description[0] %></h6>
+                      <% if (el.description[1].length !== 0 && el.description[1][0]) { %>
+                      <br />
+                      <span><strong>Notes: </strong></span>
+                      <br />
+                      <% for( let i = 0; i < el.description[1].length; i++ ) { %>
+                      <span><%= el.description[1][i] %></span>
+                      <br />
+                      <% } %> <% } %> <% if (el.description[2].length !== 0 && el.description[2][0])
+                      { %>
+                      <br />
+                      <span><strong>Préparation: </strong></span>
+                      <br />
+                      <% for( let i = 0; i < el.description[2].length; i++ ) { %>
+                      <span><%= el.description[2][i] %></span>
+                      <br />
+                      <% } %> <% } %>
+                      <br />
+                      <% if (el.description[3]) { %>
+                      <span><strong>Couleur: </strong></span>
+                      <br />
+                      <span><%= el.description[3] %></span>
+                      <br />
+                      <% } %>
+                    </td>
+                    <td>
+                      <% for( let i = 0; i < el.priceWithoutTax.length; i++ ) { %> <% if (i !== 0) {
+                      %>
+                      <span class="text-muted">OR</span>
+                      <% } %>
+                      <h6 class="mb-0"><%= el.priceWithoutTax[i] %></h6>
+                      <% } %>
+                    </td>
+                    <td>
+                      <% for( let i = 0; i < el.taxPrice.length; i++ ) { %> <% if (i !== 0) { %>
+                      <span class="text-muted">OR</span>
+                      <% } %>
+                      <h6 class="mb-0"><%= el.taxPrice[i] %>$</h6>
+                      <% } %>
+                    </td>
+                    <td>
+                      <% for( let i = 0; i < el.priceTotal.length; i++ ) { %> <% if (i !== 0) { %>
+                      <span class="text-muted">OR</span>
+                      <% } %>
+                      <h6 class="mb-0"><%= el.priceTotal[i] %></h6>
+                      <% } %>
+                    </td>
+                  </tr>
+                  <% }) %> <% } %>
+                </tbody>
+              </table>
+            </div>
+            <br />
+            <% if (allInfo && allInfo.totalDue && !allInfo.custInfo.hideTotalBox) { %>
+            <div class="card-body">
+              <div class="d-md-flex flex-md-wrap">
+                <% if (allInfo && allInfo.customNote && allInfo.customNote.length !== 0 &&
+                allInfo.customNote[0]) { %>
+                <div style="text-align: left">
+                  <h4>Note:</h4>
+                  <br />
+                  <% for( let i = 0; i < allInfo.customNote.length; i++ ) { %>
+                  <p><%= allInfo.customNote[i] %></p>
+                  <% } %>
+                </div>
+                <% } %>
+                <div class="pt-2 mb-3 wmin-md-400 ml-auto">
+                  <br />
+                  <div class="table-responsive">
+                    <table class="table">
+                      <tbody>
+                        <tr>
+                          <th class="text-left">
+                            Total Avant Taxes:<br /><br />Taxes:<br /><br />Total Après Taxes:<br /><br />Dépôt:
+                          </th>
+                          <td class="text-right text-primary">
+                            <h5 class="font-weight-semibold"><%= allInfo.totalWithoutTaxes %>$</h5>
+                            <h5 class="font-weight-semibold" style="margin-top: 16px">
+                              <%= allInfo.totalTaxes %>$
+                            </h5>
+                            <h5 class="font-weight-semibold" style="margin-top: 16px">
+                              <%= allInfo.totalDue %>$
+                            </h5>
+                            <h5 class="font-weight-semibold" style="margin-top: 16px">
+                              <%= allInfo.depositAmt %>$
+                            </h5>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th class="text-left">Balance:</th>
+                          <td class="text-right text-primary">
+                            <h5 class="font-weight-semibold"><%= allInfo.totalAfterDeposit %>$</h5>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% } %> <% if (allInfo && !allInfo.totalDue) { %>
+            <div class="card-body">
+              <div class="d-md-flex flex-md-wrap">
+                <div class="pt-2 mb-3 wmin-md-400 ml-auto">
+                  <br />
+                  <div class="table-responsive">
+                    <table class="table">
+                      <tbody>
+                        <tr>
+                          <th class="text-left">dépôt:</th>
+                          <td class="text-right text-primary">
+                            <h5 class="font-weight-semibold"><%= allInfo.depositAmt %>$</h5>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% } %>
+            <div class="container mb-50" style="width: 50%">
+              <div>
+                <div>
+                  <h5 class="text-center"><strong>REMARQUES ADDITIONNELLES</strong></h5>
+                  <h6 class="text-center">
+                    Garder le chantier propre et sécuritaire en tout temps
+                  </h6>
+                  <h6 class="text-center">
+                    Couvrir toutes les surfaces pour éviter les gouttes de peinture
+                  </h6>
+                  <% if (allInfo && allInfo.custInfo.warranty) { %>
+                  <h6 class="text-center">Travaux Garantie 2 ans</h6>
+                  <% } %>
+                  <br />
+                  <h5 class="text-center"><strong>MODALITÉS DE PAIEMENT</strong></h5>
+                  <h6 class="text-center">Dépôt de 20% à la signature</h6>
+                  <h6 class="text-center">Balance payable à la fin des travaux</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="page-break-before: always"></div>
+    <div class="container d-flex justify-content-center mt-50 mb-50">
+      <span class="text-muted">
+        <h4>PARTIE II – TERMES ET CONDITIONS</h4>
+        <h5>1. Nature et portée du contrat</h5>
+        <p>
+          Business Manager s’engage à exécuter, pour le client identifié à la Section 1 de la Partie
+          I (le « Client »), les travaux décrits à la Section "description" de la Partie I du
+          présent Contrat (les « Travaux »).
+        </p>
+        <h5>2. Échéancier de réalisation des Travaux</h5>
+        <p>
+          Business Manager s’engage à déployer tous les efforts raisonnables pour réaliser les
+          Travaux selon l’échéancier décrit à la Partie I du présent Contrat. Toutefois, le Client
+          déclare expressément comprendre que Business Manager ne peut lui garantir que les Travaux
+          seront exécutés à partir d’une date précise ou complétés avant une date précise. Par
+          conséquent, l’échéancier de réalisation des Travaux contenu au présent Contrat est fourni
+          à titre indicatif seulement et le Client dégage expressément Business Manager de toute
+          responsabilité pour tout préjudice advenant que Business Manager ne puisse entreprendre et
+          / ou avoir terminé l’exécution des Travaux à, ou avant une date donnée.
+        </p>
+        <h5>3. Propreté et protection des objets et surfaces</h5>
+        <p>
+          Business Manager s’engage à laisser le chantier (le « Lieu des Travaux ») en bon état de
+          propreté et à ranger de façon sécuritaire tout matériel devant être laissé temporairement
+          sur le Lieu des Travaux durant l’exécution des Travaux. Sous réserve des dispositions de
+          l’article 7 des présentes, Business Manager protègera les surfaces et les objets se
+          trouvant sur le Lieu des travaux, de façon à éviter tout dommage auxdits objets et
+          surfaces.
+        </p>
+        <h5>4. Choix des matériaux</h5>
+        <p>
+          Business Manager s’engage à exécuter les Travaux en utilisant les matériaux (tels que les
+          apprêts, peintures et / ou teintures) de marques et niveaux de qualité spécifiés à la
+          Partie I. Toutefois, le Client autorise expressément Business Manager à utiliser des
+          matériaux de marques différentes à celles indiquées au présent Contrat, pour autant que
+          les matériaux alors utilisés par Business Manager soient de qualité équivalente.
+        </p>
+        <h5>5. Choix des couleurs</h5>
+        <p>
+          Business Manager prendra tous les moyens raisonnables pour obtenir les couleurs et finis
+          de peinture / teinture exigés par le Client et décrits au présent Contrat. Le Client
+          comprend qu’il peut exister des différences entre l’apparence d’une couleur sur un
+          échantillon et l’apparence de cette même couleur lorsqu’elle est appliquée sur une surface
+          spécifique, notamment en raison de la lumière ambiante, des propriétés de la surface
+          d’application et des propriétés de la peinture / teinture dans laquelle les teintes sont
+          ajoutées. Business Manager ne sera, en aucun cas, responsable de remplacer une couleur
+          choisie par le Client, sauf si la peinture / teinture, dans sa couleur et / ou son fini,
+          diffère manifestement de celle qu’a sélectionné le Client, auquel cas, et dans ce cas
+          uniquement, Business Manager apportera les correctifs nécessaires à ses frais. Le Client
+          qui, suite à la signature du présent Contrat, modifie son choix de peinture / teinture, de
+          couleur et / ou de fini, comprend qu’une telle modification entraînera des frais
+          supplémentaires.
+        </p>
+        <h5>6. Temps de séchage</h5>
+        <p>
+          Business Manager indiquera au Client la durée pendant laquelle la peinture / teinture
+          fraîchement appliquée devra sécher avant d’être exposée à tout contact (le « Temps de
+          séchage »). Le Client dégage expressément Business Manager de toute responsabilité en cas
+          de dommages résultant de son défaut de respecter tout Temps de séchage indiqué par
+          Business Manager.
+        </p>
+        <h5>7. Objets fragiles, précieux et encombrants; animaux</h5>
+        <p>
+          Le Client s’engage, selon le cas, à retirer, sécuriser ou solidifier tout objet, tout item
+          et / ou toute structure se trouvant sur le Lieu des Travaux et présentant un risque de
+          bris ou de détérioration, notamment en raison de son caractère précieux ou fragile, ou
+          constituant un risque pour la santé et la sécurité du personnel de Business Manager. Il
+          sera de la responsabilité du Client de s’assurer que soit retiré du Lieu des Travaux tout
+          objet pouvant nuire à la manipulation d’équipements, à l’accès aux surfaces faisant
+          l’objet des Travaux et / ou à la circulation du personnel de Business Manager (« Objets
+          encombrants »). Des frais supplémentaires pourraient être exigés au Client, au taux
+          horaire de 55$/hr $, advenant que des Objets encombrants doivent être retirés du Lieu des
+          Travaux pendant la durée d’exécution des Travaux. Le Client enlèvera du Lieu des Travaux
+          tout animal pouvant représenter un risque pour la santé et la sécurité du personnel de
+          Business Manager, ainsi que tout animal susceptible de s’échapper du Lieu des Travaux.
+          Business Manager ne sera en aucun cas responsable du bris ou de la perte de tout Objet
+          encombrant, précieux ou fragile se trouvant sur le Lieu des Travaux, ni des dommages ou
+          pertes résultant du fait qu’un objet dangereux se 6600 St-Urbain, Montréal bureau 301
+          trouve sur le Lieu des Travaux, ni encore de la perte d’un animal présent sur le Lieu des
+          Travaux.
+        </p>
+        <h5>8. Situation Imprévues- Restrictions</h5>
+        <p>
+          Le présent contrat est fondé sur une inspection visuelle de la surface avant le début des
+          travaux. Si des difficultés qui ne pouvais être décelées par une inspection visuelle avant
+          le début des travaux devaient survenir le client devra payer un supplément pour
+          l’achèvement du travail nécessaire pour corriger la situation imprévue. Un exemple d’une
+          telle situations est le défaut d’une application de peinture antérieure qui, au moment de
+          l’estimation n’était pas visible ou s’il y a présence de peinture au plomb ou s’il y a un
+          manque de stucco couvrir la peinture
+        </p>
+        <h5>9. Garantie sur les travaux</h5>
+        <p>
+          Sous réserve de ce qui suit et des exclusions de garantie expressément déclarées à la
+          Section 5 de la Partie I du présent Contrat, les Travaux sont garantis pour une période de
+          (2) an à compter de la date de fin des travaux (la « Garantie »). L’application de la
+          garantie est exclue pour tout travail non entièrement payé à Business Manager par le
+          Client. L’application de la Garantie est également exclue en cas de détérioration d’une
+          surface résultant du défaut du Client de respecter le Temps de séchage ou découlant d’une
+          négligence du Client, de l’utilisation abusive ou inusitée des surfaces ayant fait l’objet
+          des Travaux, de l’altération totale ou partielle de telles surfaces par le Client, ou
+          encore de l’exposition de telles surfaces à des conditions inappropriées. Le Client qui
+          entend invoquer la Garantie doit, avant de prendre toute mesure corrective, donner avis
+          écrit de sa réclamation à Business Manager. Le Client accepte que les travaux correctifs à
+          être réalisés par Business Manager en vertu de la Garantie soient exécutés en fin de
+          saison estivale, s’il s’agit de travaux exécutés à l’extérieur. Restrictions De La
+          Garantie • Tout travail pour lequel Business Manager n’a pas été payé en entier • Tout
+          travail auquel d’autres entrepreneur ont participé • Tout travail pour lequel le client a
+          fourni la peinture
+        </p>
+        <h5>10. Dépôt</h5>
+        <p>
+          Le Client s’oblige à payer à Business Manager, dans les trente (30) jours de sa date
+          d’exigibilité, le dépôt indiqué en Partie I du présent Contrat, le cas échéant. La valeur
+          totale du contrat, déduite du dépôt versé par le Client le cas échéant (« Solde
+          contractuel »), payable dans les trente (30) jours de la date de fin des travaux. Toute
+          somme due par le Client peut être payée à Business Manager par chèque libellé à « Business
+          Manager » ou par virement électronique (y compris via le système Interac).
+        </p>
+        <h5>11. Défauts de paiement</h5>
+        <p>
+          Toute somme impayée aux termes des présentes porte intérêt au taux d’un pourcent (1%) par
+          mois de retard (12,68% par année) à compter du trente et unième (31e) jour suivant sa date
+          d’exigibilité. Business Manager se réserve le droit d’exiger du Client le remboursement
+          des frais raisonnablement engagés (judiciaires, extrajudiciaires ou autres) dans le
+          recouvrement de sommes que le Client refuse ou néglige de lui payer conformément aux
+          présentes, y compris les frais engagés dans la publication d’une hypothèque légale de la
+          construction et, s’il y a lieu, l’exercice de recours hypothécaires par Business Manager.
+        </p>
+      </span>
+    </div>
+  </body>
+</html>
