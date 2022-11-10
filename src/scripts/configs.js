@@ -36,7 +36,7 @@ const Configs = {
         // },
       },
     },
-    systemUserId: 'xxxxxxxxx',
+    systemUserId: process.env.REACT_APP_SYSTEM_USER_ID,
   },
   Staging: {
     Env: 'Staging',
@@ -70,7 +70,7 @@ const Configs = {
         // },
       },
     },
-    systemUserId: 'xxxxxxxxx',
+    systemUserId: process.env.REACT_APP_DEV_SYSTEM_USER_ID,
   },
   Local: {
     Env: 'Local',
@@ -82,7 +82,7 @@ const Configs = {
       messagingSenderId: process.env.REACT_APP_DEV_FIREBASE_MESSAGE_SENDER_ID,
       appId: process.env.REACT_APP_DEV_FIREBASE_APP_ID,
     },
-    FirebaseFunctionUrl: 'http://localhost:5001/xxxxxx/us-central1',
+    FirebaseFunctionUrl: 'http://localhost:5001/ilias-crm/us-central1',
     uiConfig: {
       signInFlow: 'redirect',
       signInSuccessUrl: Constants.jobsConfigs.allPaths.Others.routes.Login.route,
@@ -104,7 +104,7 @@ const Configs = {
         // },
       },
     },
-    systemUserId: 'xxxxxxxxx',
+    systemUserId: process.env.REACT_APP_DEV_SYSTEM_USER_ID,
   },
 }
 
