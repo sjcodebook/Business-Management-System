@@ -1,5 +1,7 @@
 ![Banner Image](https://webbrainsmedia.com/static/0790bdbe3714edd11d90cf341fcc1983/cafad/cover.png 'Banner Image')
 
+Original Blog Post Link Written By Me => https://webbrainsmedia.com/blogs/business-management-system
+
 Hey everyone 👋
 
 I am open sourcing my first freelancing project which is this business management system for a canadian painting company. Today, all his company's day to day operations which includes Payrolls, Expenses, Invoices generation, Estimates generation, Time Tracking, Production Calendar, client emailing etc... are managed by this system. So, yeah it's not a toy project and it's not a simple CRUD app either 😅 as its been used actively in real life scenerio 😉.
